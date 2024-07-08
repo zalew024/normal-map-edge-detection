@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=Krita/PythonPlugin
+X-KDE-Library=normal_map
+X-Python-2-Compatible=false
+X-Krita-Manual=Manual.html
+Name=normal_map
+Comment=docker pls
