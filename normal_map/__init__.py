@@ -56,9 +56,9 @@ def configure_logger() -> None:
 
 configure_logger()
 
-logging.info(f"Cache directory: {CACHE_DIR.as_posix()}")
-logging.info(f"Site packages directory: {SITE_PACKAGES.as_posix()}")
-logging.info(f"Added {SITE_PACKAGES.as_posix()} to sys.path")
+logging.info(f"Cache directory: {CACHE_DIR.as_posix()!r}")
+logging.info(f"Site packages directory: {SITE_PACKAGES.as_posix()!r}")
+logging.info(f"Added {SITE_PACKAGES.as_posix()!r} to sys.path")
 logging.info(f"sys.stdin: {sys.stdin}")
 logging.info(f"sys.stdout: {sys.stdout}")
 logging.info(f"sys.stderr: {sys.stderr}")
