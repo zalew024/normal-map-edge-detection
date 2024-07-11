@@ -1,5 +1,4 @@
 import sys
-from click import Path
 from krita import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from os import path
