@@ -87,13 +87,13 @@ def change_slope(
     logging.debug(f"N_newG: {new_normalized_g.shape} {new_normalized_g.dtype}")
 
     # Denormalize and assign back to corresponding channels.
-    newR = np.floor(denormalize(new_normalized_r)).astype(np.uint8)
+    newR = denormalize(new_normalized_r)
     logging.debug(f"newR: {newR.shape} {newR.dtype}")
 
-    newG = np.floor(denormalize(new_normalized_g)).astype(np.uint8)
+    newG = denormalize(new_normalized_g)
     logging.debug(f"newG: {newG.shape} {newG.dtype}")
 
-    newB = np.floor(denormalize(new_normalized_b)).astype(np.uint8)
+    newB = denormalize(new_normalized_b)
     logging.debug(f"newB: {newB.shape} {newB.dtype}")
 
     newB[newB < 128] = 128

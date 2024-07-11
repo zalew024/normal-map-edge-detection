@@ -3,8 +3,10 @@ import math
 from krita import *
 import numpy as np
 import numpy.typing as npt
+from PyQt5.QtGui import QImage
 
 from normal_map.slope_filter_numpy import change_slope
+from normal_map.utils import convert_numpy_to_qimage, convert_qimage_to_numpy
 
 
 class Filter:
@@ -40,38 +42,7 @@ class Filter:
             heightToNormalFilterConfig.setProperty(prop, val)
         self.heightToNormalFilter.setConfiguration(heightToNormalFilterConfig)
 
-    def changeSlope(self, imageData: QImage, filterLayer):
-        angle_deg = self.normalMapProps["slope"]
-
-        # Get image dimensions
-        width = imageData.width()
-        height = imageData.height()
-        logging.debug(f"Image shape (w|h): {width}x{height}")
-        assert width > 0 and height > 0
-
-        # Get the pointer to the image data
-        ptr = imageData.bits()
-        assert ptr is not None
-        ptr.setsize(imageData.sizeInBytes())
-        shape = (height * width, 4)
-
-        # Convert the data to a numpy array
-        array = np.array(ptr, copy=True, dtype=np.float32).reshape(*shape)
-        array = change_slope(array, angle_deg)
-        array = array.astype(np.uint8)
-        logging.debug(f"Array: {array.shape} {array.dtype}")
-
-        imageData = QImage(array.data, width, height, QImage.Format_RGBA8888)
-        imageData = imageData.rgbSwapped()
-        logging.info(f"{filterLayer}, {type(filterLayer)}")
-        ptr = imageData.bits()
-        ptr.setsize(imageData.sizeInBytes())
-        filterLayer.setPixelData(
-            QByteArray(ptr.asstring()), 0, 0, imageData.width(), imageData.height()
-        )
-
-    def normalize(self, rgb: npt.NDArray[np.float32]) -> npt.NDArray[np.float32]:
-        return ((2 * rgb) / 255) - 1
-
-    def denormalize(self, N_rgb: npt.NDArray[np.float32]) -> npt.NDArray[np.float32]:
-        return (255 * (N_rgb + 1)) / 2
+    def changeSlope(self, image: QImage) -> QImage:
+        array = convert_qimage_to_numpy(image)
+        array = change_slope(array, self.normalMapProps["slope"])
+        return convert_numpy_to_qimage(array, (image.width(), image.height()))
