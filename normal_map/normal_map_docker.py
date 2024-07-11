@@ -1,10 +1,10 @@
-import sys
 from krita import *
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore
+from PyQt5.QtGui import QImage
 from os import path
 from .normal_map_filter import *
 
-from pathlib import Path
+import logging
 
 
 DOCKER_TITLE = "Normal Map (Edge Detection)"
@@ -125,22 +125,31 @@ class NormalMapDocker(DockWidget):
             "slope": self.spinBox.value(),
         }
 
+    @property
+    def image_size(self) -> tuple[int, int]:
+        return (self.doc.width(), self.doc.height())
+
     def applyFilter(self, filterLayer):
 
         filter = Filter(self.normalMapProps)
         filter.setFilterProps()
-        filter.heightToNormalFilter.apply(
-            filterLayer, 0, 0, self.doc.width(), self.doc.height()
-        )
+        filter.heightToNormalFilter.apply(filterLayer, 0, 0, *self.image_size)
 
-        pixelBytes = filterLayer.projectionPixelData(
-            0, 0, self.doc.width(), self.doc.height()
-        )
+        pixelBytes = filterLayer.projectionPixelData(0, 0, *self.image_size)
         imageFormat = QImage.Format_RGBA8888  # U8
-        imageData = QImage(
-            pixelBytes, self.doc.width(), self.doc.height(), imageFormat
-        ).rgbSwapped()
-        filter.changeSlope(imageData, filterLayer)
+        imageData = QImage(pixelBytes, *self.image_size, imageFormat).rgbSwapped()
+
+        imageData = filter.changeSlope(imageData)
+
+        imageData = imageData.rgbSwapped()
+        logging.info(f"{filterLayer}, {type(filterLayer)}")
+
+        ptr = imageData.bits()
+        assert ptr is not None
+        ptr.setsize(imageData.sizeInBytes())
+
+        filterLayer.setPixelData(QByteArray(ptr.asstring()), 0, 0, *self.image_size)
+
         self.doc.refreshProjection()
 
     def changeWidthValueSpinBox(self):

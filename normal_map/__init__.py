@@ -162,15 +162,16 @@ import numpy as np
 logging.info(f"numpy version: {np.__version__}")
 
 
-from krita import DockWidgetFactory, DockWidgetFactoryBase
-from .normal_map_docker import NormalMapDocker
+if is_library_available("krita"):
+    from krita import DockWidgetFactory, DockWidgetFactoryBase
+    from .normal_map_docker import NormalMapDocker
 
-DOCKER_ID = "Normal Map (Edge Detection)"
-instance = Krita.instance()
-dock_widget_factory = DockWidgetFactory(
-    DOCKER_ID, DockWidgetFactoryBase.DockRight, NormalMapDocker
-)
+    DOCKER_ID = "Normal Map (Edge Detection)"
+    instance = Krita.instance()
+    dock_widget_factory = DockWidgetFactory(
+        DOCKER_ID, DockWidgetFactoryBase.DockRight, NormalMapDocker
+    )
 
-instance.addDockWidgetFactory(dock_widget_factory)
+    instance.addDockWidgetFactory(dock_widget_factory)
 
-logging.info("Normal Map plugin initialized.")
+    logging.info("Normal Map plugin initialized.")
