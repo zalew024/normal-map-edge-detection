@@ -4,11 +4,11 @@ Normal Map Booster is a Krita plugin to generate custom normal maps from height 
 
 ## Installation
 
-Normal Map Booster plugin is released as zip archive ready to import with Krita plugin import script. You can find release zip archives (eg. `normal_map-x.y.z.zip`) on [releases](https://github.com/zalew024/normal-map-edge-detection/releases) page, they are available alongside source code archives.
+Normal Map Booster plugin is released as zip archive ready to import with Krita plugin import script. You can find release zip archives (eg. `normal_map_booster-x.y.z.zip`) on [releases](https://github.com/zalew024/normal-map-edge-detection/releases) page, they are available alongside source code archives.
 
-To install this plugin with Krita plugin import script, first please start Krita. Afterwards, in menu in top bar, expand `Tools` > `Scripts` > `Import Python Plugin from File...`. In file selection popup please navigate to `normal_map-x.y.z.zip` you have downloaded (x.y.z should match plugin release of your choice) and press `Open` button. In `Activate Plugin? - Krita` popup press `Yes` button and restart Krita.
+To install this plugin with Krita plugin import script, first please start Krita. Afterwards, in menu in top bar, expand `Tools` > `Scripts` > `Import Python Plugin from File...`. In file selection popup please navigate to `normal_map_booster-x.y.z.zip` you have downloaded (x.y.z should match plugin release of your choice) and press `Open` button. In `Activate Plugin? - Krita` popup press `Yes` button and restart Krita.
 
-Now to enable Normal Map Booster plugin go to `Settings` > `Configure Krita` > `Python Plugin Manager` and enable `Normal Map (Edge Detection)`.
+Now to enable Normal Map Booster plugin go to `Settings` > `Configure Krita` > `Python Plugin Manager` and enable `normal_map_booster`.
 
 ## Preview
 
