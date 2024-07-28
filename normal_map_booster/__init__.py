@@ -14,7 +14,7 @@ from io import StringIO
 import logging
 
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 
 PIP_WHL_URL = "https://files.pythonhosted.org/packages/e7/54/0c1c068542cee73d8863336e974fc881e608d0170f3af15d0c0f28644531/pip-24.1.2-py3-none-any.whl"
@@ -135,7 +135,6 @@ def install(library_name_like: str) -> None:
 
 
 def ensure_dependencies():
-
     if not is_library_available("pip"):
         logging.info("pip is not available.")
         with TemporaryDirectory() as temp_dir:
