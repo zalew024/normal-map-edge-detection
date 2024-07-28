@@ -1,10 +1,13 @@
 [tool.poetry]
-name = "normal_map"
+name = "normal_map_booster"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "Normal Map Booster is a Krita plugin to generate custom normal maps from height maps."
+authors = [
+    "Natalia Zalewska <natalya.zalewska@gmail.com>",
+    "Krzysztof Wisniewski <argmaster.world@gmail.com>",
+]
 readme = "README.md"
-include = ["normal_map.desktop"]
+include = ["normal_map_booster.desktop"]
 
 [tool.poetry.dependencies]
 python = "^3.9"

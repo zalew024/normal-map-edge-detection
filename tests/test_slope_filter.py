@@ -1,7 +1,7 @@
 from PIL import Image
 import numpy as np
 
-from normal_map.slope_filter_numpy import change_slope
+from normal_map_booster.slope_filter_numpy import change_slope
 from tests.assets import ASSETS_DIRECTORY_PATH
 
 OUTPUT_DIR = ASSETS_DIRECTORY_PATH / ".output"
